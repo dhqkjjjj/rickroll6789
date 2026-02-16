@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>食品加工複習</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+      color: white;
+    }
+
+    /* 縮圖樣式 (長方形) */
+    #thumbnail {
+      width: 480px;
+      height: 270px;
+      overflow: hidden;
+      border: 3px solid white;
+      margin-bottom: 20px;
+      cursor: pointer; /* 可以點縮圖播放影片 */
+    }
+    #thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 點我按鈕 */
+    #cover {
+      cursor: pointer;
+      font-size: 24px;
+      padding: 15px 30px;
+      border: 2px solid white;
+      text-align: center;
+      transition: 0.3s;
+    }
+    #cover:hover {
+      background: white;
+      color: black;
+    }
+
+    video {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 縮圖 (點這個播放 toyz666.mp4) -->
+  <div id="thumbnail" onclick="playVideo('toyz666.mp4')">
+    <img src="C:\Users\xcorn\Desktop\程式\HTML\1746009022712-2cd5a2c17e78440fb861a3bf117bc0e4-871x549.jpg" alt="影片縮圖">
+  </div>
+
+  <!-- 假畫面按鈕 (點這個播放 never_gonna_give_you_up.mp4) -->
+  <div id="cover" onclick="playVideo('never_gonna_give_you_up.mp4')">
+    點我查看內容
+  </div>
+
+  <!-- 影片 -->
+  <video id="video">
+    <source src="" type="video/mp4">
+    你的瀏覽器不支援影片
+  </video>
+
+  <script>
+    function playVideo(videoSrc) {
+      const cover = document.getElementById("cover");
+      const thumbnail = document.getElementById("thumbnail");
+      const video = document.getElementById("video");
+
+      // 隱藏按鈕和縮圖
+      cover.style.display = "none";
+      thumbnail.style.display = "none";
+
+      // 顯示影片
+      video.style.display = "block";
+
+      // 更換影片來源
+      video.querySelector('source').src = videoSrc;
+      video.load();
+
+      // 音量最大
+      video.volume = 1.0;
+
+      // 播放影片
+      video.play();
+
+      // 全螢幕
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    }
+  </script>
+
+</body>
+</html>
+<!-- 閃爍開聲音提示 -->
+<div id="sound-alert">🔊 開聲音！</div>
+
+<style>
+  #sound-alert {
+    position: fixed;
+    bottom: 30px;       /* 距離下方 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;     /* 放大文字 */
+    font-weight: bold;
+    color: yellow;
+    animation: blink 1s infinite;
+    z-index: 1000;
+    text-shadow: 2px 2px 5px black; /* 增加陰影更醒目 */
+  }
+
+  @keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
+</style>
